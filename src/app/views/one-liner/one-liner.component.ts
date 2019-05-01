@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HerokuService} from '../../models/services/heroku.service';
+import {OnelinerService} from '../../models/services/oneliner.service';
 import {Heroku} from '../../models/heroku';
 
 @Component({
@@ -10,17 +10,15 @@ import {Heroku} from '../../models/heroku';
 export class OneLinerComponent implements OnInit {
 
   oneLiner: Heroku;
-  trial = window.localStorage.getItem('token')
-  constructor(private herokuService: HerokuService) { }
+  constructor(private jokeService: OnelinerService) { }
 
   ngOnInit() {
     this.getOneLiner();
-    console.log('token');
   }
   getOneLiner(): void {
-    this.herokuService.getOneLiner().subscribe(
+    this.jokeService.getOneLiner().subscribe(
       (res) => {
-        this.oneLiner = new Heroku(res);
+        this.oneLiner = res;
       }
     );
   }

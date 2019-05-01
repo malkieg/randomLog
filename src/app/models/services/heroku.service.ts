@@ -10,9 +10,7 @@ export class HerokuService {
   private proxyUrl = 'https://cors-anywhere.herokuapp.com/';
   private baseUrl = 'https://uncle-pineapple.herokuapp.com/';
   private httpOptions = {
-    headers: new HttpHeaders({
-      Authorization: localStorage.getItem('token')
-    })
+    headers: new HttpHeaders ()
       .set('Content-Type', 'application/x-www-form-urlencoded')
   };
 
