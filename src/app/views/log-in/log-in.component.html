@@ -1,13 +1,14 @@
-<form (ngSubmit)="success()">
+<form (ngSubmit)="logIn()">
     <label for="username">Username</label>
-    <input type="text" id="username" [(ngModel)]="username" required>
+    <input type="text" name="username" id="username" [(ngModel)]="username" required>
     <label for="password">Password</label>
-    <input type="text" id="password" [(ngModel)]="password" required>
+    <input type="text" name="password" id="password" [(ngModel)]="password" required>
     <button type="submit">Log In</button>
 </form>
 
-<div *ngIf="trial">
-  <h1>{{trial}}</h1>
+<div *ngIf="error">
+  <h1>{{error}}</h1>
 </div>
+
 
 

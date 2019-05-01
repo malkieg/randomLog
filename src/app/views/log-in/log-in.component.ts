@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HerokuService} from '../../models/services/heroku.service';
 
 @Component({
   selector: 'app-log-in',
@@ -9,19 +10,23 @@ export class LogInComponent implements OnInit {
 
   username: string;
   password: string;
-  trial: string;
+  error: string;
 
-  constructor() { }
+  constructor(private herokuService: HerokuService) { }
 
   ngOnInit() {
   }
-  success(): any {
+  logIn(): void {
     if (this.username === 'admin' && this.password === 'password') {
-      this.trial = 'worked';
-      return this.trial;
+       this.herokuService.login(this.username, this.password).subscribe((res) => {
+         if (res.token) {
+           window.localStorage.setItem('token', res.token);
+           console.log(res.token);
+         }
+       });
+       this.error = '';
     } else {
-      this.trial = 'wrong username or password';
-      return this.trial;
+      this.error = 'Wrong username or password';
     }
   }
 

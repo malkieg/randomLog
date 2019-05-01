@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {HerokuService} from '../../models/services/heroku.service';
+import {Heroku} from '../../models/heroku';
 
 @Component({
   selector: 'app-one-liner',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OneLinerComponent implements OnInit {
 
-  constructor() { }
+  oneLiner: Heroku;
+  trial = window.localStorage.getItem('token')
+  constructor(private herokuService: HerokuService) { }
 
   ngOnInit() {
+    this.getOneLiner();
+    console.log('token');
+  }
+  getOneLiner(): void {
+    this.herokuService.getOneLiner().subscribe(
+      (res) => {
+        this.oneLiner = new Heroku(res);
+      }
+    );
   }
 
 }
